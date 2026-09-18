@@ -37,6 +37,8 @@ Ao final do projeto, o usuário deve conseguir:
 
 ## 4. Funcionalidades
 
+> **Legenda:** em *Critérios de aceitação*, `[x]` indica que o critério foi testado e funciona. Em *Estados*, `[x]` indica que o estado existe e está implementado, e `N/A` indica que o estado não se aplica àquela funcionalidade.
+
 ### F01 — Buscar séries
 
 **Descrição:** Campo de busca na Home que consulta o endpoint `/search/tv` da TMDB e exibe os resultados em cards (poster, nome, ano de lançamento).
@@ -66,8 +68,8 @@ Ao final do projeto, o usuário deve conseguir:
 **Estados:**
 - [x] Inicial (série não adicionada)
 - [x] Sucesso (série adicionada/atualizada)
-- [ ] Carregando (não se aplica — operação local)
-- [ ] Vazio (não se aplica)
+- N/A: Carregando (operação local)
+- N/A: Vazio
 - [x] Erro (falha ao salvar no localStorage)
 
 ### F03 — Progresso por episódio
@@ -99,10 +101,10 @@ Ao final do projeto, o usuário deve conseguir:
 
 **Estados:**
 - [x] Inicial (nenhuma série ainda salva)
-- [ ] Carregando (não se aplica — leitura local é imediata)
+- N/A: Carregando (leitura local é imediata)
 - [x] Sucesso (lista exibida)
 - [x] Vazio (nenhuma série no filtro selecionado)
-- [ ] Erro (não se aplica)
+- N/A: Erro
 
 ### F05 — Estatísticas visuais
 
@@ -116,10 +118,10 @@ Ao final do projeto, o usuário deve conseguir:
 
 **Estados:**
 - [x] Inicial (nenhum dado ainda)
-- [ ] Carregando (não se aplica — cálculo local é imediato)
+- N/A: Carregando (cálculo local é imediato)
 - [x] Sucesso (estatísticas exibidas)
 - [x] Vazio (usuário ainda não assistiu nada)
-- [ ] Erro (não se aplica)
+- N/A: Erro
 
 ### F06 — Nota pessoal por série
 
@@ -133,9 +135,9 @@ Ao final do projeto, o usuário deve conseguir:
 **Estados:**
 - [x] Inicial (sem nota)
 - [x] Sucesso (nota salva)
-- [ ] Carregando (não se aplica)
-- [ ] Vazio (não se aplica)
-- [ ] Erro (não se aplica)
+- N/A: Carregando
+- N/A: Vazio
+- N/A: Erro
 
 ### F07 — Persistência local
 
@@ -149,8 +151,8 @@ Ao final do projeto, o usuário deve conseguir:
 **Estados:**
 - [x] Inicial (localStorage vazio na primeira visita)
 - [x] Sucesso (leitura/escrita funcionando)
-- [ ] Carregando (não se aplica)
-- [ ] Vazio (primeira visita, sem dados)
+- N/A: Carregando
+- N/A: Vazio (coberto pelo estado Inicial)
 - [x] Erro (localStorage indisponível/corrompido — aplicação segue funcionando com lista vazia)
 
 ## 5. Regras do Produto

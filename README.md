@@ -2,7 +2,9 @@
 
 Um guia pessoal para organizar as séries que você assiste — porque depois do fim do TV Time, ninguém mais lembra em que episódio parou.
 
-**🔗 Projeto publicado:** [cole aqui o link da Vercel]
+**🔗 Projeto publicado:** [cole aqui o link da Vercel] · [cole aqui o link do GitHub Pages]
+
+Quem só quer usar o Rewind é só abrir o link acima.
 
 ---
 
@@ -89,6 +91,8 @@ O desenvolvimento seguiu a metodologia de Spec Driven Development, com apoio de 
 
 ## Como rodar o projeto
 
+> Esta seção é apenas para quem quer rodar o **código** na própria máquina. Quem visita o site publicado não precisa de chave: ela já vai embutida na versão publicada.
+
 1. Instale as dependências:
    ```bash
    npm install
@@ -106,4 +110,16 @@ O desenvolvimento seguiu a metodologia de Spec Driven Development, com apoio de 
 
 ## Deploy
 
-Ao publicar na Vercel, cadastre a variável de ambiente `VITE_TMDB_API_KEY` nas configurações do projeto (Settings → Environment Variables) — o arquivo `.env` não é enviado ao repositório.
+A chave da TMDB fica **somente** no serviço de publicação (nunca no repositório: o `.env` está no `.gitignore`). Como o Vite embute as variáveis `VITE_*` no momento do build, é preciso **refazer o deploy** depois de cadastrar ou trocar a chave.
+
+### Vercel
+
+1. Em [vercel.com](https://vercel.com), clique em **Add New → Project** e importe este repositório (o preset Vite é detectado automaticamente).
+2. Em **Settings → Environment Variables**, crie `VITE_TMDB_API_KEY` com a sua chave da TMDB, marcando Production, Preview e Development.
+3. Faça o deploy (ou, se já existir, **Deployments → ⋯ → Redeploy**).
+
+### GitHub Pages
+
+1. No repositório, vá em **Settings → Secrets and variables → Actions → New repository secret** e crie o secret `VITE_TMDB_API_KEY` com a sua chave.
+2. Em **Settings → Pages**, escolha **Source: GitHub Actions**.
+3. O build com a chave é feito por um workflow do GitHub Actions, que lê o secret e publica a pasta `dist`.
