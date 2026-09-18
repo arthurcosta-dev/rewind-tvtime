@@ -2,7 +2,7 @@
 
 ## 1. Objetivo
 
-As referências abaixo orientam as decisões de experiência e interface do Rewind. Nenhuma delas é do universo de filmes/séries — foram escolhidas porque cada uma resolve bem um pedaço do nosso problema (organização, progresso e estatísticas), como sugerido no enunciado.
+As referências abaixo orientam as decisões de experiência e interface do Rewind. Nem todas são do universo de filmes/séries (o Letterboxd é; o Notion e os apps de treino não) — foram escolhidas porque cada uma resolve bem um pedaço do nosso problema (organização, progresso, estatísticas e avaliação), como sugerido no enunciado.
 
 ## 2. Referência 01 — Notion
 
@@ -47,10 +47,10 @@ https://letterboxd.com
 ![Referência 03](./imagens/referencia-03.png)
 
 ### O que observamos?
-O Letterboxd usa uma avaliação simples por estrelas (1 a 5) integrada diretamente ao card/página do filme, sem precisar de uma tela de "avaliação" separada, e mostra o status de forma visual e compacta (assistido, quer assistir).
+O Letterboxd mostra a nota em estrelas (com a média e a distribuição das avaliações) e as ações de registrar e avaliar na mesma página do filme, ao lado do pôster e do título, sem precisar de uma tela separada.
 
 ### O que vamos aproveitar?
-A integração da nota (estrelas) e do status diretamente na mesma tela de detalhes, sem exigir navegação extra.
+A integração da nota (estrelas) e das ações do usuário diretamente na mesma tela de detalhes, sem exigir navegação extra.
 
 ### Como será adaptado?
 Na página de Detalhe da Série, o `RatingStars` e o `StatusSelector` ficam lado a lado, próximos ao poster e ao nome da série — o usuário marca o status e dá a nota no mesmo lugar onde já está acompanhando o progresso dos episódios.

@@ -1,9 +1,10 @@
 import { FiSearch } from "react-icons/fi";
 
-export default function SearchBar({ valor, aoDigitar, aoBuscar }) {
+export default function SearchBar({ valor, aoDigitar }) {
+  // A busca acontece sozinha enquanto o usuário digita (ver useEffect da Home).
+  // Aqui o envio do formulário só evita que a página recarregue ao apertar Enter.
   function lidarComEnvio(evento) {
     evento.preventDefault();
-    aoBuscar(valor);
   }
 
   return (

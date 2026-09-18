@@ -2,6 +2,7 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import EpisodeItem from "./EpisodeItem";
 import Loader from "./Loader";
 import ErrorState from "./ErrorState";
+import EmptyState from "./EmptyState";
 
 function contarAssistidosDaTemporada(progresso, numeroTemporada) {
   const prefixo = `S${numeroTemporada}E`;
@@ -17,6 +18,7 @@ export default function SeasonAccordion({
   erroEpisodios,
   progresso,
   aoSelecionarTemporada,
+  aoTentarNovamente,
   aoMarcarEpisodio,
 }) {
   return (
@@ -44,8 +46,11 @@ export default function SeasonAccordion({
                 {erroEpisodios && !carregandoEpisodios && (
                   <ErrorState
                     mensagem={erroEpisodios}
-                    aoTentarNovamente={() => aoSelecionarTemporada(temporada.season_number)}
+                    aoTentarNovamente={aoTentarNovamente}
                   />
+                )}
+                {temporada.episode_count === 0 && (
+                  <EmptyState mensagem="Nenhum episódio cadastrado nesta temporada." />
                 )}
                 {!carregandoEpisodios &&
                   !erroEpisodios &&

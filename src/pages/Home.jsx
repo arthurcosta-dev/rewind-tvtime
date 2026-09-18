@@ -12,6 +12,8 @@ export default function Home({ minhasSeries, aoAdicionar }) {
   const [resultados, setResultados] = useState([]);
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState(null);
+  // Sobe 1 a cada "Tentar novamente" pra refazer a busca com o mesmo termo.
+  const [tentativa, setTentativa] = useState(0);
 
   // F01 - busca com um pequeno atraso (debounce) pra não disparar uma requisição a cada tecla
   useEffect(() => {
@@ -36,19 +38,19 @@ export default function Home({ minhasSeries, aoAdicionar }) {
     }, 500);
 
     return () => clearTimeout(temporizador);
-  }, [termoBusca]);
+  }, [termoBusca, tentativa]);
 
   const idsJaSalvos = minhasSeries.map((serie) => serie.id);
 
   return (
     <div>
       <h1>O que você vai assistir hoje?</h1>
-      <SearchBar valor={termoBusca} aoDigitar={setTermoBusca} aoBuscar={() => {}} />
+      <SearchBar valor={termoBusca} aoDigitar={setTermoBusca} />
 
       {carregando && <Loader mensagem="Sintonizando resultados..." />}
 
       {!carregando && erro && (
-        <ErrorState mensagem={erro} aoTentarNovamente={() => setTermoBusca((t) => t)} />
+        <ErrorState mensagem={erro} aoTentarNovamente={() => setTentativa((n) => n + 1)} />
       )}
 
       {!carregando && !erro && termoBusca.trim() !== "" && resultados.length === 0 && (

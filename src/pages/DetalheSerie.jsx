@@ -6,6 +6,7 @@ import RatingStars from "../components/RatingStars";
 import SeasonAccordion from "../components/SeasonAccordion";
 import Loader from "../components/Loader";
 import ErrorState from "../components/ErrorState";
+import EmptyState from "../components/EmptyState";
 import { buscarDetalhesSerie, buscarTemporada, urlDoPoster } from "../services/tmdb";
 
 export default function DetalheSerie({
@@ -26,6 +27,8 @@ export default function DetalheSerie({
   const [episodios, setEpisodios] = useState([]);
   const [carregandoEpisodios, setCarregandoEpisodios] = useState(false);
   const [erroEpisodios, setErroEpisodios] = useState(null);
+  // Sobe 1 a cada "Tentar novamente" pra refazer a busca dos episódios da mesma temporada.
+  const [tentativaEpisodios, setTentativaEpisodios] = useState(0);
 
   const serieSalva = minhasSeries.find((serie) => serie.id === idNumerico);
 
@@ -71,7 +74,7 @@ export default function DetalheSerie({
     }
 
     carregarEpisodios();
-  }, [idNumerico, temporadaSelecionada]);
+  }, [idNumerico, temporadaSelecionada, tentativaEpisodios]);
 
   if (carregando) return <Loader mensagem="Carregando página da série..." />;
   if (erro) return <ErrorState mensagem={erro} />;
@@ -130,18 +133,23 @@ export default function DetalheSerie({
       {serieSalva && (
         <>
           <h2>Temporadas</h2>
-          <SeasonAccordion
-            temporadas={temporadasValidas}
-            temporadaSelecionada={temporadaSelecionada}
-            episodios={episodios}
-            carregandoEpisodios={carregandoEpisodios}
-            erroEpisodios={erroEpisodios}
-            progresso={serieSalva.episodesWatched}
-            aoSelecionarTemporada={setTemporadaSelecionada}
-            aoMarcarEpisodio={(numeroTemporada, numeroEpisodio, assistido) =>
-              aoMarcarEpisodio(serieSalva.id, numeroTemporada, numeroEpisodio, assistido)
-            }
-          />
+          {temporadasValidas.length === 0 ? (
+            <EmptyState mensagem="Essa série ainda não tem temporadas cadastradas." />
+          ) : (
+            <SeasonAccordion
+              temporadas={temporadasValidas}
+              temporadaSelecionada={temporadaSelecionada}
+              episodios={episodios}
+              carregandoEpisodios={carregandoEpisodios}
+              erroEpisodios={erroEpisodios}
+              progresso={serieSalva.episodesWatched}
+              aoSelecionarTemporada={setTemporadaSelecionada}
+              aoTentarNovamente={() => setTentativaEpisodios((n) => n + 1)}
+              aoMarcarEpisodio={(numeroTemporada, numeroEpisodio, assistido) =>
+                aoMarcarEpisodio(serieSalva.id, numeroTemporada, numeroEpisodio, assistido)
+              }
+            />
+          )}
         </>
       )}
     </div>

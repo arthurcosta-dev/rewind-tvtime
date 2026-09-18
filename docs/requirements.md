@@ -44,10 +44,11 @@ Ao final do projeto, o usuário deve conseguir:
 **Descrição:** Campo de busca na Home que consulta o endpoint `/search/tv` da TMDB e exibe os resultados em cards (poster, nome, ano de lançamento).
 
 **Critérios de aceitação:**
-- [ ] O usuário digita um termo e, ao buscar, os resultados aparecem em cards
-- [ ] Cada card mostra poster, nome e ano
-- [ ] Buscas sem resultado exibem uma mensagem de "nenhuma série encontrada"
-- [ ] Falha na API exibe uma mensagem de erro amigável
+- [x] O usuário digita um termo e, ao buscar, os resultados aparecem em cards
+- [x] Cada card mostra poster, nome e ano
+- [x] Buscas sem resultado exibem uma mensagem de "nenhuma série encontrada"
+- [x] Falha na API exibe uma mensagem de erro amigável
+- [x] O botão "Tentar novamente" refaz a busca
 
 **Estados:**
 - [x] Inicial (campo vazio, nenhum resultado)
@@ -61,32 +62,34 @@ Ao final do projeto, o usuário deve conseguir:
 **Descrição:** A partir de um card de busca ou da página de detalhes, o usuário adiciona a série à lista pessoal e escolhe um status: "quero assistir", "assistindo" ou "assistido". O status pode ser alterado depois a qualquer momento.
 
 **Critérios de aceitação:**
-- [ ] É possível adicionar uma série ainda não salva
-- [ ] É possível trocar o status de uma série já salva
-- [ ] O status muda automaticamente para "assistido" quando todos os episódios forem marcados (ver F03)
+- [x] É possível adicionar uma série ainda não salva
+- [x] É possível trocar o status de uma série já salva
+- [x] O status muda automaticamente para "assistido" quando todos os episódios forem marcados (ver F03)
 
 **Estados:**
 - [x] Inicial (série não adicionada)
 - [x] Sucesso (série adicionada/atualizada)
-- N/A: Carregando (operação local)
+- N/A: Carregando (a adição faz uma requisição rápida em `/tv/{id}` e não tem indicador próprio no MVP; cliques repetidos não duplicam a série)
 - N/A: Vazio
-- [x] Erro (falha ao salvar no localStorage)
+- [x] Erro (falha ao salvar no localStorage ou ao buscar os detalhes da série na API — mensagem exibida no topo da página)
 
 ### F03 — Progresso por episódio
 
 **Descrição:** Na página de detalhes da série (`/serie/:id`), o usuário vê as temporadas (consumindo `/tv/{id}` e `/tv/{id}/season/{numero}` da TMDB) em formato de acordeão e marca, episódio por episódio, o que já assistiu.
 
 **Critérios de aceitação:**
-- [ ] As temporadas da série são listadas corretamente
-- [ ] Ao abrir uma temporada, os episódios aparecem com checkbox
-- [ ] Marcar/desmarcar um episódio atualiza o progresso salvo
-- [ ] Quando 100% dos episódios estão marcados, o status da série vira "assistido" automaticamente
+- [x] As temporadas da série são listadas corretamente
+- [x] Ao abrir uma temporada, os episódios aparecem com checkbox
+- [x] Marcar/desmarcar um episódio atualiza o progresso salvo
+- [x] Quando 100% dos episódios estão marcados, o status da série vira "assistido" automaticamente
+- [x] Ao marcar o primeiro episódio de uma série "quero assistir", o status vira "assistindo" automaticamente
+- [x] Ao desmarcar um episódio de uma série "assistido", o status volta para "assistindo"
 
 **Estados:**
 - [x] Inicial (nenhum episódio marcado)
 - [x] Carregando (buscando temporadas/episódios na API)
 - [x] Sucesso (dados carregados e progresso exibido)
-- [x] Vazio (série sem temporadas cadastradas na API)
+- [x] Vazio (série sem temporadas, ou temporada sem episódios, cadastrados na API — mensagem exibida)
 - [x] Erro (falha ao buscar dados da API)
 
 ### F04 — Minhas Séries
@@ -94,10 +97,10 @@ Ao final do projeto, o usuário deve conseguir:
 **Descrição:** Página que lista todas as séries salvas pelo usuário, com filtro por status (todas / quero assistir / assistindo / assistido).
 
 **Critérios de aceitação:**
-- [ ] Lista todas as séries salvas no localStorage
-- [ ] Filtro por status funciona corretamente
-- [ ] Cada item mostra poster, nome, status, progresso (ex: "12/20 episódios") e nota (se houver)
-- [ ] Lista vazia exibe mensagem incentivando a busca de séries
+- [x] Lista todas as séries salvas no localStorage
+- [x] Filtro por status funciona corretamente
+- [x] Cada item mostra poster, nome, status, progresso (ex: "12/20 episódios") e nota (se houver)
+- [x] Lista vazia exibe mensagem incentivando a busca de séries
 
 **Estados:**
 - [x] Inicial (nenhuma série ainda salva)
@@ -111,10 +114,10 @@ Ao final do projeto, o usuário deve conseguir:
 **Descrição:** Página com cards numéricos (total de séries por status, total de episódios assistidos, horas estimadas assistidas, nota média dada) e um gráfico de barras simples (feito em CSS puro, sem lib) mostrando os gêneros mais assistidos, calculados a partir dos gêneros das séries salvas.
 
 **Critérios de aceitação:**
-- [ ] Cards numéricos batem com os dados salvos
-- [ ] Horas estimadas = episódios assistidos × duração média do episódio
-- [ ] Gráfico de gêneros reflete corretamente a proporção de cada gênero
-- [ ] Página informa quando não há dados suficientes para gerar estatísticas
+- [x] Cards numéricos batem com os dados salvos
+- [x] Horas estimadas = episódios assistidos × duração média do episódio
+- [x] Gráfico de gêneros reflete corretamente a proporção de cada gênero
+- [x] Página informa quando não há dados suficientes para gerar estatísticas
 
 **Estados:**
 - [x] Inicial (nenhum dado ainda)
@@ -128,9 +131,9 @@ Ao final do projeto, o usuário deve conseguir:
 **Descrição:** Campo opcional de 1 a 5 (estrelas ou números) na página de detalhes, para o usuário avaliar séries que já assistiu ou está assistindo.
 
 **Critérios de aceitação:**
-- [ ] É possível dar, alterar ou remover a nota a qualquer momento
-- [ ] A nota aparece na lista "Minhas Séries"
-- [ ] A nota média entra no cálculo da página de Estatísticas
+- [x] É possível dar, alterar ou remover a nota a qualquer momento
+- [x] A nota aparece na lista "Minhas Séries"
+- [x] A nota média entra no cálculo da página de Estatísticas
 
 **Estados:**
 - [x] Inicial (sem nota)
@@ -144,9 +147,9 @@ Ao final do projeto, o usuário deve conseguir:
 **Descrição:** Todos os dados de "Minhas Séries" (status, progresso por episódio, notas) são salvos no `localStorage` do navegador, permitindo que os dados persistam entre sessões sem necessidade de login ou backend.
 
 **Critérios de aceitação:**
-- [ ] Dados continuam disponíveis após recarregar a página
-- [ ] Dados continuam disponíveis após fechar e reabrir o navegador
-- [ ] Nenhum dado é perdido ao navegar entre páginas da aplicação
+- [x] Dados continuam disponíveis após recarregar a página
+- [x] Dados continuam disponíveis após fechar e reabrir o navegador
+- [x] Nenhum dado é perdido ao navegar entre páginas da aplicação
 
 **Estados:**
 - [x] Inicial (localStorage vazio na primeira visita)
@@ -159,6 +162,9 @@ Ao final do projeto, o usuário deve conseguir:
 
 - Cada série na lista pessoal tem exatamente um status: "quero assistir", "assistindo" ou "assistido" — nunca mais de um ao mesmo tempo.
 - O status muda automaticamente para "assistido" quando 100% dos episódios da série estão marcados como assistidos.
+- Ao marcar o primeiro episódio de uma série que está como "quero assistir", o status muda automaticamente para "assistindo".
+- Se o usuário desmarcar um episódio de uma série "assistido", o status volta automaticamente para "assistindo" (a série deixou de estar 100% assistida).
+- Endereços que não existem no app exibem uma página de "não encontrada" com link de volta para a busca.
 - Uma série não pode ser adicionada duas vezes à lista pessoal (o botão "Adicionar" fica desabilitado se ela já foi salva).
 - A nota pessoal é opcional, vai de 1 a 5, e pode ser alterada ou removida a qualquer momento — não é obrigatória pra usar o app.
 - O MVP cobre apenas séries de TV; filmes estão fora do escopo (ver seção 6).
